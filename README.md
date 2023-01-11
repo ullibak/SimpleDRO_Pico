@@ -1,7 +1,7 @@
 # SimpleDRO
 DRO-like readout of digital caliper or digital dial indicator using Raspberry Pi Pico and Arduino IDE
 
-If you do not have a digital readout (DRO) on your lathe or millig machine, you can use this little helper to get precise readings with DRO-like functions. 
+If you do not have a digital readout (DRO) on your lathe, drill press or millig machine, you can use this little helper to get precise readings with DRO-like functions for one axis. 
 
 ### Features
 - Show readout of caliper on a display
@@ -13,7 +13,8 @@ If you do not have a digital readout (DRO) on your lathe or millig machine, you 
 - Raspberry Pi Pico
 - Waveshare Pico Restouch 3.5" touch display module: https://www.waveshare.com/pico-restouch-lcd-3.5.htm
 - Cheap Chinese digital caliper or digital dial indicator with data port. 
-- Case
+- Case (used Hammond Electronics 1590SBK, this comes already with black coating)
+- USB power supply or power bank
 
 ### Software
 You can either compile and upload the sketch using the Arduino IDE or you can simply upload the compiled UF2 file
@@ -43,7 +44,34 @@ The calipers works with 1.5 V so that the clock and data signal have to be ampli
 
 If you connect the "Vpos" pin as shown in the schematics above, you can power the caliper and do not need a battery anymore. 
 
+### Instructions
 Here is the screenshot of the GUI:
 
 ![image](https://user-images.githubusercontent.com/26085758/211805538-a2ad9fb0-4ba7-4686-8152-8f8bc6ecbf14.png)
+
+#### Zero the display
+Press "SET" button twice.
+#### Enter reference value
+Press "SET" button, enter the value and press "SET" button again.
+#### Use diameter mode
+When used on the X axis of a lathe, the change in diameter is calculated by dividing the change in linear displacement by 2. Simply press the "DIA" button and the diameter symbol Ø will appear in the screen.
+#### Invert reading
+If the direction of your measurement is opposite to the direction of the caliper or dial indicator, press the "INV" button. The "INV" button will turn grey. The displayed value will decreas when the caliper opens or the dial indicator pin is pushed in. To switch off inverted reading, press the "INV" button again.
+
+
+
+A version using a caliper...
+
+![image](https://user-images.githubusercontent.com/26085758/211814871-62c4cbb7-a808-42ff-aad5-71da6a9bec53.png)
+
+
+
+...and a version using a digital dial indicator with 3 digits resolution (this requires compiling the INO file with  :
+
+![image](https://user-images.githubusercontent.com/26085758/211814903-28e0557d-ce6e-4959-a6d4-96f645cf3687.png)
+
+
+Have fun!
+
+
 
