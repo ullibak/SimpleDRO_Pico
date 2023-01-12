@@ -32,7 +32,7 @@ You can either compile and upload the sketch using the Arduino IDE or you can si
 - Open the .ino-sketch, compile and upload.
   
 ### Electronics
-Many of the cheap Chinese calipers offer 4 connections for data readout. (Unfortunately, there is no list of calipers that use the protocoll described below nor is there any indication when ordering. Many do use this protocol, but there are also others. You probably have to try first with one that is lying around in your workshop or you just order one and try.)
+Many of the cheap Chinese calipers offer 4 connections for data readout. (Unfortunately, there is no list of calipers that use the protocol described below nor is there any indication when ordering. Many do use this protocol, but there are also others. You probably have to try first with one that is lying around in your workshop or you just order one and try.)
 Measured values are periodically sent (e.g. every 100 ms), even if the caliper is in the OFF-state. Most cheap calipers use a simple protocol with 24 bits (bit 0 to bit 23). The first few bits contain the numeric value in a binary coding, bit 20 contains the sign (+ or -), bit 23 contains the unit (inch or mm). The state of the data signal at each falling edge of the clock signal indicates the state of the individual bits. Here is an example of the readings "0.00" and "0.08":
 
 ![image](https://user-images.githubusercontent.com/26085758/211794586-c7c69b70-3a2f-4531-b8a5-781749ff11e0.png)
