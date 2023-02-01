@@ -19,17 +19,20 @@ If you do not have a digital readout (DRO) on your lathe, drill press or millig 
 ### Software
 You can either compile and upload the sketch using the Arduino IDE or you can simply upload the compiled UF2 file
 #### Upload UF2 file
-- Install Raspberry Pi Pico on the Pico ResTouch module and connect Pico to an USB port.
+- Install Raspberry Pi Pico on the Pico ResTouch module and connect Pico to a USB port.
 - Press "Bootsel" button on the Pico and "Run" button on the ResTouch simultaneously. A new drive "RPI-RP2" appears.
 - Copy the uf2-file SimpleDRO.ino.uf2 to this drive (or SimpleDRO.ino_fine_res.uf2 for 3 digit resolution). Pico will reboot and run the program. 
-- Touch the corners as indicated to calibrate touch screen.
+- Touch the corners as indicated to calibrate touch screen. This should only be necessary on first startup with a new Pico. The calibration values are saved in flash memory.
 
 #### Compilation and Upload
 - Install Arduino IDE (www.arduino.cc)
 - Configure Arduino IDE as described in https://www.waveshare.com/wiki/Pico-ResTouch-LCD-3.5
   - install Raspberry Pi Pico Board driver by Earle F. Philhower III (https://github.com/earlephilhower/arduino-pico)
   - install TFT_eSPI library and configure it as described in the Waveshare Wiki Page mentionned above
-- Open the .ino-sketch, compile and upload.
+- Open the SimpleDRO.ino
+- Set flash memory:
+![Flash_settings](https://user-images.githubusercontent.com/26085758/216113242-64811098-2ffe-490c-ae6a-08308cd56217.jpg)
+- compile and upload.
   
 ### Electronics
 Many of the cheap Chinese calipers offer 4 connections for data readout. (Unfortunately, there is no list of calipers that use the protocol described below nor is there any indication when ordering. Many do use this protocol, but there are also others. You probably have to try first with one that is lying around in your workshop or you just order one and try.)
@@ -54,9 +57,9 @@ Press "SET" button twice.
 #### Enter reference value
 Press "SET" button, enter the reference value and press "SET" button again.
 #### Use diameter mode
-When used on the X axis of a lathe, the diameter is more important than the linear reading. The change in diameter is calculated by dividing the change in linear displacement by 2. Simply press the "DIA" button and the diameter symbol Ø will appear in the screen.
+When used on the X axis of a lathe, the diameter is more important than the linear reading. The change in diameter is calculated by dividing the change in linear displacement by 2. Simply press the "DIA" button and the diameter symbol Ø will appear in the screen. The diameter mode ist enabled by default on startup. This helps preventing scrap on the lathe, if you forget to switch on diameter mode...
 #### Invert reading
-If the direction of your measurement is opposite to the direction of the caliper or dial indicator, press the "INV" button. The "INV" button will turn grey. The displayed values will decreas when the caliper opens or the dial indicator pin is pushed in. To switch off inverted reading, press the "INV" button again.
+If the direction of your measurement is opposite to the direction of the caliper or dial indicator, press the "INV" button. The "INV" button will turn grey. The displayed values will decrease when the caliper opens or the dial indicator pin is pushed in. To switch off inverted reading, press the "INV" button again.
 
 
 
