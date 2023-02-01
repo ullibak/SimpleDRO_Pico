@@ -122,7 +122,7 @@ volatile unsigned int datavalue; // The measured value
 volatile float meas_value, meas_value_old, set_value, disp_value; 
 float reference_value = 0;
 volatile bool NewValueFlag = false;
-bool DiameterMode = false;
+bool DiameterMode = false;   // Set default to true to avoid scrap on the lathe...
 bool InchFlag = false;
 bool SetFlag = false;
 bool InvertMode = false;    // InvertMode means that if the reading increaes, the displayed value decreases. 
@@ -213,6 +213,7 @@ void setup() {  // do everything except measurement on core 0
     tft.fillRect(DISP_X, DISP_Y, DISP_W, DISP_H, INV_BLACK);    // Draw number display area 
     tft.drawRect(DISP_X, DISP_Y, DISP_W, DISP_H, INV_WHITE);    // Draw number display frame
     drawKeypad();               // Draw keypad
+    setDiameterMode(true);      // Set default to true to avoid scrap on the lathe...
 }
 
 void loop(void) {
@@ -308,21 +309,10 @@ void loop(void) {
             // Toggle diameter or linear measurement
             if (b == 14) {
                 if (DiameterMode == false){
-                    DiameterMode = true;
-                   
-                    tft.setTextDatum(TL_DATUM);        // Use top left corner as text coord datum
-                    tft.setFreeFont(&FreeSans24pt7b);  // Choose a nicefont that fits box
-                    tft.setTextColor(DISP_TCOLOR);     // Set the font colour
-
-                    // Draw the diameter sign by combining "/" and "o", the value returned is the width in pixels
-                    xwidth_dia = tft.drawString("o", DISP_X + 10, DISP_Y + 16);
-                    xwidth_dia = tft.drawString("/", DISP_X + 16, DISP_Y + 20);
-                    //status("Diameter mode set");
+                    setDiameterMode(true);
                 }
                 else {
-                    DiameterMode = false;
-                    tft.fillRect(DISP_X + 10 , DISP_Y + 1, xwidth_dia + 15, DISP_H - 2, INV_BLACK);
-                    //status("Diameter mode cleared");
+                    setDiameterMode(false);
                 }
             }
         } 
@@ -402,6 +392,27 @@ void drawKeypad()
     }
   }
 }
+
+void setDiameterMode(bool dmode){
+    if (dmode == true){
+        DiameterMode = true;
+
+        tft.setTextDatum(TL_DATUM);        // Use top left corner as text coord datum
+        tft.setFreeFont(&FreeSans24pt7b);  // Choose a nicefont that fits box
+        tft.setTextColor(DISP_TCOLOR);     // Set the font colour
+
+        // Draw the diameter sign by combining "/" and "o", the value returned is the width in pixels
+        xwidth_dia = tft.drawString("o", DISP_X + 10, DISP_Y + 16);
+        xwidth_dia = tft.drawString("/", DISP_X + 16, DISP_Y + 20);
+        //status("Diameter mode set");
+        }
+    else {
+        DiameterMode = false;
+        tft.fillRect(DISP_X + 10 , DISP_Y + 1, xwidth_dia + 15, DISP_H - 2, INV_BLACK);
+        //status("Diameter mode cleared");
+        }
+}
+
 
 void touch_calibrate()  // calibrate touch pad
 {
